@@ -5,7 +5,8 @@ const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
 
 if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
+    // Função para lidar com o toggle do menu
+    const toggleMenu = () => {
         navMenu.classList.toggle('active');
         
         // Change icon
@@ -17,6 +18,13 @@ if (menuToggle && navMenu) {
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
         }
+    };
+
+    // Adiciona eventos de click e touch
+    menuToggle.addEventListener('click', toggleMenu);
+    menuToggle.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        toggleMenu();
     });
 
     // Close menu when clicking outside
@@ -29,15 +37,30 @@ if (menuToggle && navMenu) {
         }
     });
 
-    // Close menu when clicking on a link
+    // Close menu when clicking or touching a link
     const navLinks = navMenu.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
+        const closeMenu = (e) => {
+            if (e.type === 'touchend') {
+                e.preventDefault();
+            }
             navMenu.classList.remove('active');
             const icon = menuToggle.querySelector('i');
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
-        });
+            
+            if (e.type === 'touchend') {
+                const href = link.getAttribute('href');
+                if (href) {
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 100);
+                }
+            }
+        };
+
+        link.addEventListener('click', closeMenu);
+        link.addEventListener('touchend', closeMenu);
     });
 }
 
@@ -62,11 +85,28 @@ function showToast(message, duration = 3000) {
 // CONTACT FORM HANDLING
 // ============================================
 const contactForm = document.getElementById('contactForm');
+const submitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+if (contactForm && submitButton) {
+    // Previne duplo envio
+    let isSubmitting = false;
+
+    // Feedback visual ao tocar no botão
+    submitButton.addEventListener('touchstart', () => {
+        submitButton.style.transform = 'scale(0.98)';
+    });
+
+    submitButton.addEventListener('touchend', () => {
+        submitButton.style.transform = 'scale(1)';
+    });
+
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
+        if (isSubmitting) return;
+        isSubmitting = true;
+        submitButton.disabled = true;
+
         // Get form values
         const formData = {
             name: contactForm.name.value,
@@ -83,6 +123,12 @@ if (contactForm) {
         
         // Reset form
         contactForm.reset();
+        
+        // Reativa o botão
+        setTimeout(() => {
+            isSubmitting = false;
+            submitButton.disabled = false;
+        }, 2000);
     });
 }
 
