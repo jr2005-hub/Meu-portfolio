@@ -1,0 +1,108 @@
+/* ======== CONFIGURAÇÕES GERAIS ======== */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background-color: #f7f7f7;
+  color: #333;
+}
+
+/* ======== NAVBAR ======== */
+.navbar {
+  background-color: #111;
+  padding: 15px 0;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: auto;
+}
+
+.logo {
+  color: #f0c36d;
+  font-size: 1.4em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-menu a.active,
+.nav-menu a:hover {
+  color: #f0c36d;
+}
+
+/* ======== CONTEÚDO PRINCIPAL ======== */
+.page-content {
+  padding: 50px 0;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  color: #222;
+}
+
+/* ======== IMAGEM PRINCIPAL DO DESIGN ======== */
+.law-design {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.law-design img {
+  width: 100%;
+  max-width: 600px; /* define um tamanho ideal */
+  height: auto; /* mantém a proporção da imagem */
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.law-design img:hover {
+  transform: scale(1.03); /* leve aumento ao passar o mouse */
+}
+
+/* ======== BOTÃO DE VOLTAR ======== */
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  background-color: #111;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #f0c36d;
+  color: #111;
+}
+
+/* ======== RODAPÉ ======== */
+.footer {
+  background-color: #111;
+  color: #ccc;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+  font-size: 0.9em;
+}
